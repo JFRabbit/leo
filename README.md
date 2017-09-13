@@ -107,13 +107,13 @@ Or set dict expect data:
 expect =    {
                 "code": "${IS_ANY_INTEGER}", 
     	    	"message": "${IS_ANY_STRING}",
-          	    "result": [
+                "result": [
                         {
                             "code1": "${IS_JSON_PRIMITIVE}", 
                         	"type": "ANALYSIS", 
                         	"status": 0, 
                         	"name": "${MATCH_REGEX}(([01]?\d?\d|2[0-4]\d|25[0-5])\.){3}([01]?\d?\d|2[0-4]\d|25[0-5]\.)"},
-            			
+                		
                         {
                             "code": "PREPROCESSING", 
                             "type": "ANALYSIS", 
@@ -131,8 +131,7 @@ expect =    {
                             "code": "SCORING", 
                             "type": "ANALYSIS", 
                             "status": 0, 
-                            "name": "${IS_TIMESTEMP}"}
-		     	]
-		    }
+                            "name": "${IS_TIMESTEMP}"}]
+            }
 ```
 
