@@ -6,5 +6,5 @@ class CompareData(object):
 
     def __str__(self):
         if self.is_expect:
-            return "Expect: code:\n\t%s data: %s" % (self.code, self.data)
-        return "Actual: code:\n\t%s data: %s" % (self.code, self.data)
+            return "Expect:\n\t%s data: %s" % (self.code, self.data)
+        return "Actual:\n\t%s data: %s" % (self.code, self.data)
