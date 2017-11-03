@@ -1,5 +1,5 @@
 # leo
-Python interface test(compare JSON &amp; HTTP requeset)
+Python interface test(compare JSON &amp; HTTP request)
 
 ## Prepare json data.
 
