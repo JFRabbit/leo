@@ -10,6 +10,7 @@ class RequestItems(object):
         self.data = data
         self.json = json
         self.kwargs = kwargs
+        print(self)
 
     def __str__(self):
         return "RequestItems: [url:%s, method:%s, data:%s, json:%s, kwargs:%s]" % \
@@ -56,4 +57,6 @@ def do_request(itmes: RequestItems):
             session.delete(itmes.url, **itmes.kwargs)
     }
     response = methods[itmes.method]
-    return ResponseItems(response)
+    res_items = ResponseItems(response)
+    print(res_items)
+    return res_items
