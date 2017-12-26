@@ -1,0 +1,2 @@
+http://requests-docs-cn.readthedocs.io/zh_CN/latest/user/quickstart.html
+http://cn.python-requests.org/zh_CN/latest/
