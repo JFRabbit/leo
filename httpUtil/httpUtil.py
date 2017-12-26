@@ -1,7 +1,29 @@
 import requests
 from env.partial import *
 from httpUtil.httpMethod import HttpMethod
+from jsonCompare.jsonFormat import *
 
+class RequestItems(object):
+    def __init__(self, url:str, method: HttpMethod, data=None, json=None, **kwargs):
+        self.url = url
+        self.method = method
+        self.data = data
+        self.json = json
+        self.kwargs = kwargs
+
+    def __str__(self):
+        return "RequestItems: [url:%s, method:%s, data:%s, json:%s, kwargs:%s]" % \
+               (self.url, self.method, self.data, format(self.json), self.kwargs)
+
+class ResponseItems(object):
+    def __init__(self, response: requests.Response):
+        self.url = response.url
+        self.status = response.status_code
+        self.json = response.json()
+
+    def __str__(self):
+        return "ResponseItems: [url:%s, status:%d, json:%s]" % \
+               (self.url, self.status, format(self.json))
 
 def __verify_cas():
     session = requests.session()
@@ -12,7 +34,7 @@ def __ignore_urllib3_warning():
     import urllib3
     urllib3.disable_warnings()
 
-def do_request(url:str, method: HttpMethod, data=None, json=None, **kwargs):
+def do_request(itmes: RequestItems):
     # 忽略 warning
     if http_variable[IGNORE_WARN]:
         __ignore_urllib3_warning()
@@ -24,9 +46,14 @@ def do_request(url:str, method: HttpMethod, data=None, json=None, **kwargs):
         session = __verify_cas()
 
     methods = {
-        HttpMethod.GET : session.get(url, **kwargs),
-        HttpMethod.POST: session.post(url, data, json, **kwargs),
-        HttpMethod.PUT: session.put(url, data, **kwargs),
-        HttpMethod.DELETE: session.delete(url, **kwargs)
+        HttpMethod.GET :
+            session.get(itmes.url, **itmes.kwargs),
+        HttpMethod.POST:
+            session.post(itmes.url, itmes.data, itmes.json, **itmes.kwargs),
+        HttpMethod.PUT:
+            session.put(itmes.url, itmes.data, **itmes.kwargs),
+        HttpMethod.DELETE:
+            session.delete(itmes.url, **itmes.kwargs)
     }
-    return methods[method]
+    response = methods[itmes.method]
+    return ResponseItems(response)

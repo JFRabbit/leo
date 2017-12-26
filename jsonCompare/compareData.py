@@ -1,3 +1,5 @@
+from jsonCompare.jsonFormat import *
+
 class CompareData(object):
     def __init__(self, code: int, data: dict, is_expect):
         self.code = code
@@ -6,5 +8,5 @@ class CompareData(object):
 
     def __str__(self):
         if self.is_expect:
-            return "Expect:\n\t%s data: %s" % (self.code, self.data)
-        return "Actual:\n\t%s data: %s" % (self.code, self.data)
+            return "Expect:\n\t%s data: %s" % (self.code, format(self.data))
+        return "Actual:\n\t%s data: %s" % (self.code, format(self.data))

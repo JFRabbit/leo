@@ -14,4 +14,8 @@ actual = {"code": 0, "message": "111",
           "foo":"bar"}
 
 if __name__ == '__main__':
-    print(type(expect))
+    print(expect)
+
+    import json
+    r = json.dumps(expect,  sort_keys=True, indent=4, ensure_ascii=False)
+    print(r)
