@@ -35,7 +35,7 @@ def __ignore_urllib3_warning():
     import urllib3
     urllib3.disable_warnings()
 
-def do_request(itmes: RequestItems):
+def do_request(items: RequestItems):
     # 忽略 warning
     if http_variable[IGNORE_WARN]:
         __ignore_urllib3_warning()
@@ -48,15 +48,15 @@ def do_request(itmes: RequestItems):
 
     methods = {
         HttpMethod.GET :
-            session.get(itmes.url, **itmes.kwargs),
+            session.get(items.url, **items.kwargs),
         HttpMethod.POST:
-            session.post(itmes.url, itmes.data, itmes.json, **itmes.kwargs),
+            session.post(items.url, items.data, items.json, **items.kwargs),
         HttpMethod.PUT:
-            session.put(itmes.url, itmes.data, **itmes.kwargs),
+            session.put(items.url, items.data, **items.kwargs),
         HttpMethod.DELETE:
-            session.delete(itmes.url, **itmes.kwargs)
+            session.delete(items.url, **items.kwargs)
     }
-    response = methods[itmes.method]
+    response = methods[items.method]
     res_items = ResponseItems(response)
     print(res_items)
     return res_items
