@@ -40,9 +40,6 @@ class Comparator(object):
         :return: True False
         """
 
-        print(expect)
-        print(actual)
-
         self.__path += PATH_ROOT
 
         # 判断Response Code
@@ -59,7 +56,6 @@ class Comparator(object):
             self.is_same = False
             pass
 
-        print(self)
         return self
 
     def __compare_json(self, expect: dict, actual: dict):
