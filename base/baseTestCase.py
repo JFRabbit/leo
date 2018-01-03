@@ -17,3 +17,8 @@ class BaseTestCase(unittest.TestCase):
 
         result = Comparator().compare(expect, actual)
         print(result)
+
+        if result.is_same is False:
+            raise Exception("Run Fail!")
+        else:
+            print("Run Success!")
