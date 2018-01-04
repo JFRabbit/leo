@@ -57,4 +57,5 @@ def do_request(items: RequestItems):
     }
     response = methods[items.method]
     res_items = ResponseItems(response)
+    session.close()
     return res_items

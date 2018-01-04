@@ -7,11 +7,11 @@ from jsonCompare.compare import CompareData, Comparator
 class BaseTestCase(unittest.TestCase):
     def do_compare(self, request_items: RequestItems, expect_code: int, expect_json: dict):
         print(request_items)
-        res = do_request(request_items)
-        print(res)
+        self.res = do_request(request_items)
+        print(self.res)
 
         expect = CompareData(expect_code, expect_json, True)
-        actual = CompareData(res.status, res.json, False)
+        actual = CompareData(self.res.status, self.res.json, False)
         print(expect)
         print(actual)
 
