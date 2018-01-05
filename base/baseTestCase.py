@@ -6,7 +6,7 @@ from jsonCompare.compare import CompareData, Comparator
 
 class BaseTestCase(unittest.TestCase):
     def do_compare(self, request_items: RequestItems, expect_code: int, expect_json: dict):
-        print(request_items)
+        print("\n", "=" * 100, "\n", request_items)
         self.res = do_request(request_items)
         print(self.res)
 
