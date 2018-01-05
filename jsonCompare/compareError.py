@@ -5,4 +5,5 @@ class CompareError(object):
         self.error_msg = error_msg
 
     def __str__(self):
-        return "\n\terrorPath:\t%s\n\terrorCode:\t%s\n\terrorMsg:\n%s" % (self.error_path, self.error_code, self.error_msg)
+        return "\n\terrorPath:\t%s\n\terrorCode:\t%s\n\terrorMsg:\n%s" % (
+            self.error_path, self.error_code, self.error_msg)

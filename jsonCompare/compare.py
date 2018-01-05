@@ -17,7 +17,7 @@ class Comparator(object):
 
     def __str__(self):
         if self.is_same:
-            return "\nIsSame:\n\t%s" % (self.is_same)
+            return "\nIsSame:\n\t%s" % self.is_same
         return "\nIsSame:\n\t%s\nErrorMsg:%s\n" % (self.is_same, self.error_msg)
 
     def set_rule(self, key: str, rule: Rule, regex=None):
@@ -28,7 +28,7 @@ class Comparator(object):
         :param regex: if Rule is MATCH_REGEX
         :return:
         """
-        if regex == None:
+        if regex is None:
             self.__rule_dict[key] = rule
         else:
             self.__rule_dict[key] = rule + regex
@@ -69,7 +69,7 @@ class Comparator(object):
         if self.__rule_dict.get(key) == Rule.IGNORE_VALUE or self.__rule_dict.get(key) == Rule.IS_JSON_OBJECT:
             return
 
-        self.__path += PATH_OBJECT
+        self.__path += PATH_OBJECT + "[%s]" % key
 
         # 判断Response 的json字段长度
         if self.__rule_dict.get(key) == Rule.IGNORE_OBJECT_KEY_MISS_MATCH:
@@ -108,13 +108,13 @@ class Comparator(object):
 
         pass
 
-    def __compare_list(self, key: str, expect: list, actual: list, isCheckOne=False):
+    def __compare_list(self, key: str, expect: list, actual: list, is_check_one=False):
         if self.__rule_dict.get(key) == Rule.IS_JSON_ARRAY or self.__rule_dict.get(key) == Rule.IGNORE_VALUE:
             return
 
         # key += PATH_ROOT
 
-        if isCheckOne or self.__rule_dict.get(key) == Rule.IGNORE_ARRAY_SIZE:
+        if is_check_one or self.__rule_dict.get(key) == Rule.IGNORE_ARRAY_SIZE:
             self.__path += "[0]"
             i = expect[0]
             if isinstance(i, dict):
@@ -186,8 +186,8 @@ class Comparator(object):
     def __set_error_msg(self, expect, actual):
         return "\t\tExpect: %s\n\t\tActual: %s" % (expect, actual) + DEBUG_LINE
 
-    def __set_error(self, compareError: CompareError):
-        self.error_msg += compareError.__str__()
+    def __set_error(self, compare_error: CompareError):
+        self.error_msg += compare_error.__str__()
 
     def __is_primitive(self, value):
         if isinstance(value, int):
@@ -213,7 +213,6 @@ if __name__ == '__main__':
     comparator.set_rule("result", Rule.IGNORE_ARRAY_SIZE)
     comparator.set_rule("result" + SUB_OBJ, Rule.IGNORE_OBJECT_KEY_MISS_MATCH)
     # comparator.set_rule("result", Rule.IS_JSON_ARRAY)
-
 
     result = comparator.compare(e_data, a_data)
     print(result)

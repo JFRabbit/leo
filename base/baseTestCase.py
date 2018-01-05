@@ -1,10 +1,8 @@
-import unittest
-
 from httpUtil.httpUtil import *
 from jsonCompare.compare import CompareData, Comparator
 
 
-class BaseTestCase(unittest.TestCase):
+class BaseTestCase(object):
     def do_compare(self, request_items: RequestItems, expect_code: int, expect_json: dict):
         print("\n", "=" * 100, "\n", request_items)
         self.res = do_request(request_items)

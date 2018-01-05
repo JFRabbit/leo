@@ -8,5 +8,5 @@ class CompareData(object):
 
     def __str__(self):
         if self.is_expect:
-            return "Expect:\n\t%s data: %s" % (self.code, format(self.data))
-        return "Actual:\n\t%s data: %s" % (self.code, format(self.data))
+            return "Expect:\n\t%s data: %s" % (self.code, json_format(self.data))
+        return "Actual:\n\t%s data: %s" % (self.code, json_format(self.data))

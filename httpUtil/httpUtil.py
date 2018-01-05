@@ -14,7 +14,7 @@ class RequestItems(object):
 
     def __str__(self):
         return "RequestItems: [url:%s, method:%s, data:%s, json:%s, kwargs:%s]" % \
-               (self.url, self.method, self.data, format(self.json), self.kwargs)
+               (self.url, self.method, self.data, json_format(self.json), self.kwargs)
 
 
 class ResponseItems(object):
@@ -29,7 +29,7 @@ class ResponseItems(object):
 
     def __str__(self):
         return "ResponseItems: [url:%s, status:%d, json:%s]" % \
-               (self.url, self.status, format(self.json))
+               (self.url, self.status, json_format(self.json))
 
 
 def __verify_cas():
