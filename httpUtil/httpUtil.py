@@ -3,17 +3,19 @@ from env.partial import *
 from httpUtil.httpMethod import HttpMethod
 from jsonCompare.jsonFormat import *
 
+
 class RequestItems(object):
-    def __init__(self, url:str, method: HttpMethod, data=None, json=None, **kwargs):
+    def __init__(self, url: str, method: HttpMethod, data=None, json=None, **kwargs):
         self.url = url
         self.method = method
         self.data = data
-        self.json = json
+        self.json = json  # type: dict
         self.kwargs = kwargs
 
     def __str__(self):
         return "RequestItems: [url:%s, method:%s, data:%s, json:%s, kwargs:%s]" % \
                (self.url, self.method, self.data, format(self.json), self.kwargs)
+
 
 class ResponseItems(object):
     def __init__(self, response: requests.Response):
@@ -25,14 +27,17 @@ class ResponseItems(object):
         return "ResponseItems: [url:%s, status:%d, json:%s]" % \
                (self.url, self.status, format(self.json))
 
+
 def __verify_cas():
     session = requests.session()
     session.get(CUR_ENV[CAS], verify=False)
     return session
 
+
 def __ignore_urllib3_warning():
     import urllib3
     urllib3.disable_warnings()
+
 
 def do_request(items: RequestItems):
     # 忽略 warning
@@ -46,7 +51,7 @@ def do_request(items: RequestItems):
         session = __verify_cas()
 
     methods = {
-        HttpMethod.GET :
+        HttpMethod.GET:
             session.get(items.url, **items.kwargs),
         HttpMethod.POST:
             session.post(items.url, items.data, items.json, **items.kwargs),

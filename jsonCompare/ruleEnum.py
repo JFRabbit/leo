@@ -5,6 +5,7 @@ class Rule(Enum):
     IS_ANY_INTEGER = "${IS_ANY_INTEGER}"
     IS_ANY_FLOAT = "${IS_ANY_FLOAT}"
     IS_ANY_STRING = "${IS_ANY_STRING}"
+    IS_ANY_BOOL = "${IS_ANY_BOOL}"
     IS_TIMESTEMP = "${IS_TIMESTEMP}"  # '%Y-%m-%d %H:%M:%S'
 
     MATCH_REGEX = "${MATCH_REGEX}"

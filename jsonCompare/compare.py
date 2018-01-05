@@ -164,6 +164,9 @@ class Comparator(object):
             if expect == Rule.IS_ANY_STRING.value and isinstance(actual, str):
                 return True
 
+            if expect == Rule.IS_ANY_BOOL.value and isinstance(actual, bool):
+                return True
+
             if expect == Rule.IS_TIMESTEMP.value:
                 try:
                     datetime.datetime.strptime(actual, '%Y-%m-%d %H:%M:%S')
