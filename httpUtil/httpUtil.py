@@ -21,7 +21,11 @@ class ResponseItems(object):
     def __init__(self, response: requests.Response):
         self.url = response.url
         self.status = response.status_code
-        self.json = response.json()
+        try:
+            self.json = response.json()
+        except json.decoder.JSONDecodeError as e:
+            print("json.decoder.JSONDecodeError: %s" % e)
+            self.json = response.text
 
     def __str__(self):
         return "ResponseItems: [url:%s, status:%d, json:%s]" % \
