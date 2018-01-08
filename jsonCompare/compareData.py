@@ -1,5 +1,6 @@
 from jsonCompare.jsonFormat import *
 
+
 class CompareData(object):
     def __init__(self, code: int, data: dict, is_expect):
         self.code = code

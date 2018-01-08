@@ -150,7 +150,8 @@ class Comparator(object):
 
         pass
 
-    def __compare_primitive(self, expect, actual, regex):
+    @staticmethod
+    def __compare_primitive(expect, actual, regex):
         if expect == Rule.IS_JSON_PRIMITIVE.value or expect == Rule.IGNORE_VALUE.value:
             return True
 
@@ -183,13 +184,15 @@ class Comparator(object):
         else:
             return True
 
-    def __set_error_msg(self, expect, actual):
+    @staticmethod
+    def __set_error_msg(expect, actual):
         return "\t\tExpect: %s\n\t\tActual: %s" % (expect, actual) + DEBUG_LINE
 
     def __set_error(self, compare_error: CompareError):
         self.error_msg += compare_error.__str__()
 
-    def __is_primitive(self, value):
+    @staticmethod
+    def __is_primitive(value):
         if isinstance(value, int):
             return True
         if isinstance(value, str):
@@ -201,8 +204,8 @@ class Comparator(object):
 
 
 if __name__ == '__main__':
-    e_data = CompareData(200, expect, True)
-    a_data = CompareData(200, actual, False)
+    e_data = CompareData(200, expect_test_data, True)
+    a_data = CompareData(200, actual_test_data, False)
     print(e_data)
     print(a_data)
 

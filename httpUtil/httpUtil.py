@@ -5,11 +5,11 @@ from jsonCompare.jsonFormat import *
 
 
 class RequestItems(object):
-    def __init__(self, url: str, method: HttpMethod, data=None, json=None, **kwargs):
+    def __init__(self, url: str, method: HttpMethod, data=None, request_json=None, **kwargs):
         self.url = url
         self.method = method
         self.data = data
-        self.json = json  # type: dict
+        self.json = request_json  # type: dict
         self.kwargs = kwargs
 
     def __str__(self):
@@ -54,17 +54,19 @@ def do_request(items: RequestItems):
     if env_variable[CAS]:
         session = __verify_cas()
 
-    methods = {
-        HttpMethod.GET:
-            session.get(items.url, **items.kwargs),
-        HttpMethod.POST:
-            session.post(items.url, items.data, items.json, **items.kwargs),
-        HttpMethod.PUT:
-            session.put(items.url, items.data, **items.kwargs),
-        HttpMethod.DELETE:
-            session.delete(items.url, **items.kwargs)
-    }
-    response = methods[items.method]
-    res_items = ResponseItems(response)
-    session.close()
+    try:
+        methods = {
+            HttpMethod.GET:
+                session.get(items.url, **items.kwargs),
+            HttpMethod.POST:
+                session.post(items.url, items.data, items.json, **items.kwargs),
+            HttpMethod.PUT:
+                session.put(items.url, items.data, **items.kwargs),
+            HttpMethod.DELETE:
+                session.delete(items.url, **items.kwargs)
+        }
+        response = methods[items.method]
+        res_items = ResponseItems(response)
+    finally:
+        session.close()
     return res_items
