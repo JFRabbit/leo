@@ -1,4 +1,4 @@
-from httpUtil.httpUtil import *
+from httpUtils.httpUtil import *
 from jsonCompare.compare import CompareData, Comparator
 
 

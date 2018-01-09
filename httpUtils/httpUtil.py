@@ -1,6 +1,6 @@
 import requests
 from env.partial import *
-from httpUtil.httpMethod import HttpMethod
+from httpUtils.httpMethod import HttpMethod
 from jsonCompare.jsonFormat import *
 
 

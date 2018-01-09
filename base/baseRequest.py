@@ -1,4 +1,4 @@
-from httpUtil.httpMethod import *
+from httpUtils.httpMethod import *
 
 
 class BaseRequest(object):
