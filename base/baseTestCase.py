@@ -20,3 +20,6 @@ class BaseTestCase(object):
             raise Exception("Run Fail!")
         else:
             print("Run Success!")
+
+        import time
+        time.sleep(1)
