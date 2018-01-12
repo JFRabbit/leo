@@ -3,7 +3,7 @@ from jsonCompare.compare import CompareData, Comparator
 
 
 class BaseTestCase(object):
-    def do_compare(self, request_items: RequestItems, expect_code: int, expect_json: dict):
+    def do_compare(self, request_items: RequestItems, expect_code: int, expect_json: dict, comparator=None):
         print("\n", "=" * 100, "\n", request_items)
         self.res = do_request(request_items)
         print(self.res)
@@ -13,7 +13,10 @@ class BaseTestCase(object):
         print(expect)
         print(actual)
 
-        result = Comparator().compare(expect, actual)
+        if comparator is None:
+            result = Comparator().compare(expect, actual)
+        else:
+            result = comparator.compare(expect, actual)
         print(result)
 
         if result.is_same is False:
